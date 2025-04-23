@@ -48,5 +48,19 @@ $(() => {
           };
         });
     
+    const renderChart = (ctx, labels, datasets) => {
+        if (window.miGrafico) window.miGrafico.destroy();
+        window.miGrafico = new Chart(ctx, {
+            type: 'line',
+            data: { labels, datasets },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Fecha' } },
+                    y: { title: { display: true, text: 'Casos confirmados' } }
+                }
+            }
+        });
+    };
 });
   
