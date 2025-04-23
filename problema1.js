@@ -14,7 +14,9 @@ $(() => {
       e.target.selected = !e.target.selected;
       setTimeout(() => $select.prop('scrollTop', scroll), 0);
     }
-  }; 
+  };
+  const getSelected = () => $('#regionSelect option:selected').map((_, o) => o.value).get();
+  const clearSelection = () => $('#regionSelect option').prop('selected', false); 
 })      
 
 
