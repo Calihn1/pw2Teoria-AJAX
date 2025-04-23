@@ -20,5 +20,19 @@ $(() => {
           option.textContent = region;
           return option;
         });
+        
+    const renderSelect = (selectEl, options) => {
+        selectEl.innerHTML = '';
+        options.forEach(opt => selectEl.appendChild(opt));
+        
+        selectEl.addEventListener('mousedown', e => {
+            if (e.target.tagName !== 'OPTION') return;
+            e.preventDefault();
+            const prevScroll = selectEl.scrollTop;
+            e.target.selected = !e.target.selected;
+            setTimeout(() => { selectEl.scrollTop = prevScroll; }, 0);
+        });
+    };
+    
 });
   
