@@ -12,5 +12,13 @@ $(() => {
     
     const excludeRegions = (data, excluded = ['Lima', 'Callao']) =>
       data.filter(item => !excluded.includes(item.region));
+    
+    const createOptions = regions =>
+        regions.map(({ region }) => {
+          const option = document.createElement('option');
+          option.value = region;
+          option.textContent = region;
+          return option;
+        });
 });
   
