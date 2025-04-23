@@ -16,7 +16,22 @@ $(() => {
     }
   };
   const getSelected = () => $('#regionSelect option:selected').map((_, o) => o.value).get();
-  const clearSelection = () => $('#regionSelect option').prop('selected', false); 
+  const clearSelection = () => $('#regionSelect option').prop('selected', false);
+  const drawBarChart = (labels, values) => {
+    const ctx = $('#graficoCasos')[0].getContext('2d');
+    if (window.miGrafico) window.miGrafico.destroy();
+    window.miGrafico = new Chart(ctx, {
+      type: 'bar',
+      data: { labels, datasets: [{ label: 'Casos confirmados (último día)', data: values }] },
+      options: {
+        responsive: true,
+        scales: {
+          x: { title: { display: true, text: 'Región' } },
+          y: { beginAtZero: true, title: { display: true, text: 'Casos confirmados' } }
+        }
+      }
+    });
+  }; 
 })      
 
 
