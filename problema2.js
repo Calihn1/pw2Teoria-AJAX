@@ -20,7 +20,7 @@ $(() => {
           option.textContent = region;
           return option;
         });
-        
+
     const renderSelect = (selectEl, options) => {
         selectEl.innerHTML = '';
         options.forEach(opt => selectEl.appendChild(opt));
@@ -33,6 +33,10 @@ $(() => {
             setTimeout(() => { selectEl.scrollTop = prevScroll; }, 0);
         });
     };
+
+    const getSelectedRegions = selectEl =>
+        Array.from(selectEl.selectedOptions).map(opt => opt.value);
+    
     
 });
   
