@@ -62,5 +62,10 @@ $(() => {
             }
         });
     };
+
+    const showError = msg => {
+        hideLoader();
+        alert(msg);
+    };
 });
   
