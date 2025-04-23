@@ -5,8 +5,8 @@ $(() => {
   const fetchData   = () => $.ajax({ url: 'data.json', dataType: 'json', beforeSend: showLoader })
                            .always(hideLoader);
   const toOptionsHtml = regions => regions
-  .map(r => `<option value="${r}">${r}</option>`)
-  .join('');
+    .map(r => `<option value="${r}">${r}</option>`)
+    .join('');
   const toggleOption = ($select) => (e) => {
     if (e.target.tagName === 'OPTION') {
       e.preventDefault();
@@ -31,7 +31,31 @@ $(() => {
         }
       }
     });
-  }; 
-})      
+  };
+
+  // -- Flujo principal -- 
+  fetchData().then(data => {
+    const regions = allowed.map(d => d.region);
+    const $select = $('#regionSelect');
+
+    // poblar select y setear toggle
+    $select.html(toOptionsHtml(regions));
+    $select.on('mousedown', toggleOption($select));
+
+    // evento click para generar gráfico
+    $('#btnGraficar').on('click', () => {
+      const selected = getSelected();
+      if (!selected.length) {
+        return alert('Selecciona al menos una región.');
+      }
+      const values = selected.map(region => {
+        const entry = data.find(d => d.region === region);
+        return +entry.confirmed.slice(-1)[0].value;
+      });
+      drawBarChart(selected, values);
+      clearSelection();
+    });
+  });
+});     
 
 
