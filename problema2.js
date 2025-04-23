@@ -37,6 +37,16 @@ $(() => {
     const getSelectedRegions = selectEl =>
         Array.from(selectEl.selectedOptions).map(opt => opt.value);
     
+    const buildDatasets = (data, regions) =>
+        regions.map(region => {
+          const entry = data.find(d => d.region === region);
+          return {
+            label: region,
+            data: entry.confirmed.map(c => Number(c.value)),
+            fill: false,
+            borderWidth: 2
+          };
+        });
     
 });
   
