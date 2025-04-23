@@ -6,4 +6,15 @@ $(() => {
                            .always(hideLoader);
   const toOptionsHtml = regions => regions
   .map(r => `<option value="${r}">${r}</option>`)
-  .join('');                        
+  .join('');
+  const toggleOption = ($select) => (e) => {
+    if (e.target.tagName === 'OPTION') {
+      e.preventDefault();
+      const scroll = $select.prop('scrollTop');
+      e.target.selected = !e.target.selected;
+      setTimeout(() => $select.prop('scrollTop', scroll), 0);
+    }
+  }; 
+})      
+
+
